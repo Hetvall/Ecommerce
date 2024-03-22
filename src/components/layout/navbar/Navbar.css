@@ -1,0 +1,12 @@
+.plant-logo {
+    width: 8%;
+}
+
+.categories {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style-type: none;
+    gap: 7em;
+    background-color: white;
+}
