@@ -1,5 +1,4 @@
-const ProductCard = (props) => {
-  const { title, description, price } = props;
+const ProductCard = ({ title, description, price }) => {
   return (
     <div>
       <h3>{title}</h3>

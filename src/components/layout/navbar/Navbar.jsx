@@ -10,6 +10,7 @@ const Navbar = () => {
         src="https://res.cloudinary.com/dsrxguglp/image/upload/v1711057447/plant-logo.jpg"
         alt="plant logo"
       />
+
       <ul className="categories">
         <li onClick={handleClick} style={{ cursor: "pointer" }}>
           All
@@ -27,6 +28,7 @@ const Navbar = () => {
           Plants Paintings
         </li>
       </ul>
+      <h1 className="title-page">Plants & home decor</h1>
       <CartWidget />
     </div>
   );
