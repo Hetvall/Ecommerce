@@ -1,10 +1,17 @@
-import { PiShoppingCartFill } from "react-icons/pi";
-import "./CartWidget.css";
+import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
+import { Badge } from "@mui/material";
 
 const CartWidget = () => {
   return (
-    <div className="cart-logo">
-      <PiShoppingCartFill size={40} />
+    <div className="cart-logo" style={{ position: "relative" }}>
+      <Badge
+        badgeContent={0}
+        color="success"
+        showZero
+        style={{ position: "absolute", top: 0, right: 50, cursor: "pointer" }}
+      >
+        <ShoppingCartCheckoutIcon color="action" />
+      </Badge>
     </div>
   );
 };

@@ -1,8 +1,9 @@
 import Footer from "./components/layout/footer/Footer";
 import ItemListContainer from "./components/page/itemListContainer/ItemListContainer";
 import Navbar from "./components/layout/navbar/Navbar";
-import Counter from "./components/common/counter/Counter";
+// import Counter from "./components/common/counter/Counter";
 import { useState } from "react";
+// import ComponentsTest from "./components/common/componentsTest/ComponentsTest";
 
 function App() {
   const [name, setName] = useState();
@@ -14,8 +15,9 @@ function App() {
     <div>
       <Navbar />
       <ItemListContainer />
-      <Counter />
       <Footer />
+      {/* <Counter /> */}
+      {/* <ComponentsTest /> */}
       <h2>{name}</h2>
       <button
         onClick={() => {

@@ -2,6 +2,7 @@ import "./Navbar.css";
 import CartWidget from "../../page/cart/CartWidget";
 
 const Navbar = () => {
+  const handleClick = () => {};
   return (
     <div>
       <img
@@ -10,9 +11,21 @@ const Navbar = () => {
         alt="plant logo"
       />
       <ul className="categories">
-        <li>All</li>
-        <li>Indoor</li>
-        <li>Ourdoor</li>
+        <li onClick={handleClick} style={{ cursor: "pointer" }}>
+          All
+        </li>
+        <li onClick={handleClick} style={{ cursor: "pointer" }}>
+          Indoor
+        </li>
+        <li onClick={handleClick} style={{ cursor: "pointer" }}>
+          Outdoor
+        </li>
+        <li onClick={handleClick} style={{ cursor: "pointer" }}>
+          Cactus
+        </li>
+        <li onClick={handleClick} style={{ cursor: "pointer" }}>
+          Plants Paintings
+        </li>
       </ul>
       <CartWidget />
     </div>

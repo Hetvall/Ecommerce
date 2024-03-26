@@ -9,4 +9,12 @@
     list-style-type: none;
     gap: 7em;
     background-color: white;
+    margin-bottom: 50px;
+}
+
+.categories li:hover {
+    background-color: greenyellow;
+    border-radius: 10px;
+    /* Cambia el color de fondo al hacer hover */
+    /* También puedes añadir otros estilos de hover según tus preferencias */
 }

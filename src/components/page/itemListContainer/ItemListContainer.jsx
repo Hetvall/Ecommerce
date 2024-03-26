@@ -1,9 +1,12 @@
 import ProductCard from "../../common/productCard/ProductCard";
 import "./ItemListContainer.css";
+import Greeting from "../../common/greeting/Greeting";
 
 const ItemListContainer = () => {
   return (
     <div>
+      <Greeting />
+
       <h1 className="title-page">Plants & home decor</h1>
       <div className="products-container">
         <ProductCard
