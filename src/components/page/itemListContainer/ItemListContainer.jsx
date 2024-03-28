@@ -1,4 +1,4 @@
-import ProductCard from "../../common/productCard/ProductCard";
+// import ProductCard from "../../common/productCard/ProductCard";
 import "./ItemListContainer.css";
 
 const ItemListContainer = ({ greeting }) => {
@@ -14,7 +14,7 @@ const ItemListContainer = ({ greeting }) => {
       >
         {greeting}
       </h1>
-      <div className="products-container">
+      {/* <div className="products-container">
         <ProductCard
           price={200}
           title={"titulo 1"}
@@ -30,7 +30,7 @@ const ItemListContainer = ({ greeting }) => {
           title={"titulo 3"}
           description={"descripcion 3"}
         />
-      </div>
+      </div> */}
     </div>
   );
 };

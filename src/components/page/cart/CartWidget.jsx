@@ -3,7 +3,7 @@ import { Badge } from "@mui/material";
 
 const CartWidget = () => {
   return (
-    <div className="cart-logo" style={{ position: "relative" }}>
+    <div style={{ position: "relative" }}>
       <Badge
         badgeContent={0}
         color="success"
