@@ -1,19 +1,8 @@
-import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
-import { Badge } from "@mui/material";
+import Cart from "./Cart.jsx";
 
 const CartWidget = () => {
-  return (
-    <div style={{ position: "relative" }}>
-      <Badge
-        badgeContent={0}
-        color="success"
-        showZero
-        style={{ position: "absolute", top: 0, right: 50, cursor: "pointer" }}
-      >
-        <ShoppingCartCheckoutIcon color="action" />
-      </Badge>
-    </div>
-  );
+  let addedProducts = [];
+  return <Cart addedProducts={addedProducts} />;
 };
 
 export default CartWidget;

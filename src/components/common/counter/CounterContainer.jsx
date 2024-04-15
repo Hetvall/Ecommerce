@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
+import Counter from "./Counter.jsx";
 
-const Counter = () => {
-  const [contador, setContador] = useState(0);
+const CounterContainer = () => {
+  const [contador, setContador] = useState(1);
   const [name, setName] = useState("James");
 
   useEffect(() => {
@@ -10,9 +11,9 @@ const Counter = () => {
 
   useEffect(() => {
     setName("Maria");
-  }, []);
+  }, [name]); //Array de dependencias con variables
 
-  console.log("Me ejecuto");
+  // console.log("Me ejecuto siempre");
 
   const sumar = () => {
     setContador(contador + 1);
@@ -20,6 +21,7 @@ const Counter = () => {
   const restar = () => {
     if (contador > 1) {
       setContador(contador - 1);
+      alert("Can't be less than one");
     }
   };
 
@@ -32,7 +34,7 @@ const Counter = () => {
     contador,
   };
 
-  return <CounterPresentational {...objectProps} />;
+  return <Counter {...objectProps} />;
 };
 
-export default Counter;
+export default CounterContainer;

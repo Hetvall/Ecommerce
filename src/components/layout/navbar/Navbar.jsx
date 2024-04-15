@@ -1,12 +1,12 @@
 import "./Navbar.css";
-import CartWidget from "../../page/cart/CartWidget";
+import CartWidget from "../../page/cart/CartWidget.jsx";
 
 const Navbar = () => {
   return (
-    <div>
+    <div className="categories-bar">
       <img
         className="plant-logo"
-        src="https://res.cloudinary.com/dsrxguglp/image/upload/v1711057447/plant-logo.jpg"
+        src="https://res.cloudinary.com/dsrxguglp/image/upload/v1712711016/zkfye9rcxizf27x7kz1m.webp"
         alt="plant logo"
       />
       <CartWidget />

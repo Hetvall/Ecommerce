@@ -1,38 +1,33 @@
 // import ProductCard from "../../common/productCard/ProductCard";
+import ItemList from "./ItemList.jsx";
+import { products } from "../../../productsMock";
+import { useEffect, useState } from "react";
 import "./ItemListContainer.css";
 
-const ItemListContainer = ({ greeting }) => {
-  return (
-    <div>
-      <h1
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          marginBottom: "20px",
-          color: "green",
-        }}
-      >
-        {greeting}
-      </h1>
-      {/* <div className="products-container">
-        <ProductCard
-          price={200}
-          title={"titulo 1"}
-          description={"descripcion 1"}
-        />
-        <ProductCard
-          price={300}
-          title={"titulo 2"}
-          description={"descripcion 2"}
-        />
-        <ProductCard
-          price={400}
-          title={"titulo 3"}
-          description={"descripcion 3"}
-        />
-      </div> */}
-    </div>
-  );
+const ItemListContainer = () => {
+  const [items, setItems] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const getProducts = new Promise((resolve, reject) => {
+      let x = true;
+      if (x) {
+        setTimeout(() => {
+          resolve(products);
+        }, 2000);
+      } else {
+        reject({ status: 400, message: "Algo salio mal" });
+      }
+    });
+
+    getProducts
+      .then((res) => setItems(res))
+      .catch((error) => {
+        setError(error);
+      });
+  }, []);
+
+  return <ItemList items={items} error={error} />;
 };
 
 export default ItemListContainer;

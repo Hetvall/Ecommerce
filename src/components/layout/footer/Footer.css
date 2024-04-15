@@ -1,7 +1,10 @@
 .copyright {
     display: flex;
     justify-content: center;
+    align-items: center;
     font-size: medium;
-    color: black;
-    margin-top: 470px;
+    color: #2f3e46;
+    margin-top: 100px;
+    background-color: #dad7cd;
+    padding: 21px;
 }

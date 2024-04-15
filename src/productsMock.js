@@ -1,4 +1,4 @@
-export const products = [
+export let products = [
   {
     id: 1,
     title: "Ficus",
@@ -43,5 +43,14 @@ export const products = [
     description: "Lorem Ipsun",
     category: "Indoor",
     img: "https://res.cloudinary.com/dsrxguglp/image/upload/v1711493743/POTHOS-5.webp",
+  },
+  {
+    id: 6,
+    title: "Spider Plant ",
+    price: 12.0,
+    stock: 8,
+    description: "Lorem Ipsun",
+    category: "Indoor",
+    img: "https://res.cloudinary.com/dsrxguglp/image/upload/v1712707828/y6oggv6pgaxm18qbudtm.jpg",
   },
 ];
