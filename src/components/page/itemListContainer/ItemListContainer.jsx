@@ -1,22 +1,27 @@
-// import ProductCard from "../../common/productCard/ProductCard";
 import ItemList from "./ItemList.jsx";
+import "./ItemListContainer.css";
 import { products } from "../../../productsMock";
 import { useEffect, useState } from "react";
-import "./ItemListContainer.css";
+import { useParams } from "react-router-dom";
 
 const ItemListContainer = () => {
+  // const navigate = useNavigate();
+  const { name } = useParams();
+
   const [items, setItems] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    let productsFiltered = products.filter(
+      (product) => product.category === name
+    );
+
     const getProducts = new Promise((resolve, reject) => {
       let x = true;
       if (x) {
-        setTimeout(() => {
-          resolve(products);
-        }, 2000);
+        resolve(name ? productsFiltered : products);
       } else {
-        reject({ status: 400, message: "Algo salio mal" });
+        reject({ status: 400, message: "Something went wrong" });
       }
     });
 
@@ -25,8 +30,8 @@ const ItemListContainer = () => {
       .catch((error) => {
         setError(error);
       });
-  }, []);
-
+  }, [name]);
+  // navigate();
   return <ItemList items={items} error={error} />;
 };
 

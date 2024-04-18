@@ -3,7 +3,7 @@ import ProductCard from "../../common/productCard/ProductCard";
 const ItemList = ({ items }) => {
   return (
     <div className="products-container">
-      {items.map(({ id, title, description, img, price }) => {
+      {items.map(({ id, title, description, img, price, stock }) => {
         return (
           <ProductCard
             key={id}
@@ -12,6 +12,7 @@ const ItemList = ({ items }) => {
             price={price}
             img={img}
             id={id}
+            stock={stock}
           />
         );
       })}

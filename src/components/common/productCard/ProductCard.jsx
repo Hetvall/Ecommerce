@@ -8,8 +8,9 @@ import {
   Grid,
 } from "@mui/material";
 import "./ProductCard.css";
+import { Link } from "react-router-dom";
 
-const ProductCard = ({ title, description, price, img, id }) => {
+const ProductCard = ({ title, price, img, id, stock }) => {
   return (
     <Grid xs={12} sm={6} md={4} lg={3}>
       <Card
@@ -17,6 +18,13 @@ const ProductCard = ({ title, description, price, img, id }) => {
       >
         <CardMedia sx={{ height: 200, width: 200 }} image={img} alt="plants" />
         <CardContent>
+          {/* <Typography
+            sx={{ color: "white" }}
+            variant="body2"
+            color="text.secondary"
+          >
+            {id}
+          </Typography> */}
           <Typography
             sx={{ color: "white" }}
             gutterBottom
@@ -25,37 +33,39 @@ const ProductCard = ({ title, description, price, img, id }) => {
           >
             {title}
           </Typography>
-          <Typography
+          {/* <Typography
             sx={{ color: "white" }}
             variant="body3"
             color="text.secondary"
           >
             {description}
+          </Typography> */}
+          <Typography
+            sx={{ color: "white" }}
+            variant="body2"
+            color="text.secondary"
+          >
+            Price: ${price}
           </Typography>
           <Typography
             sx={{ color: "white" }}
             variant="body2"
             color="text.secondary"
           >
-            {price}
-          </Typography>
-          <Typography
-            sx={{ color: "white" }}
-            variant="body2"
-            color="text.secondary"
-          >
-            {id}
+            Stock: {stock}
           </Typography>
         </CardContent>
         <CardActions>
-          <Button
-            sx={{
-              color: "white",
-              fontSize: "small",
-            }}
-          >
-            Share
-          </Button>
+          <Link to={`/itemDetail/${id}`}>
+            <Button
+              sx={{
+                color: "white",
+                fontSize: "small",
+              }}
+            >
+              See Details
+            </Button>
+          </Link>
         </CardActions>
       </Card>
     </Grid>
