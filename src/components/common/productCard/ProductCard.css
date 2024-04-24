@@ -1,0 +1,6 @@
+.product-cards {
+    max-Width: 345px;
+    border: 3px solid;
+    display: flex;
+    flex-Direction: column;
+}

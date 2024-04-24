@@ -1,14 +1,18 @@
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import { Badge } from "@mui/material";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { CartContext } from "../../../context/CartContext";
 
 const CartWidget = () => {
+  const { cart } = useContext(CartContext);
+
   return (
     <div style={{ position: "relative" }}>
       <Link to="/cart">
         <Badge
           className="badge"
-          badgeContent={0}
+          badgeContent={cart.length}
           color="success"
           showZero
           style={{

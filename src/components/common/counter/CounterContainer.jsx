@@ -1,37 +1,29 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Counter from "./Counter.jsx";
 
-const CounterContainer = () => {
-  const [contador, setContador] = useState(1);
-  const [name, setName] = useState("James");
-
-  useEffect(() => {
-    setName("Maria");
-  }, []); //Array de dependencias
-
-  useEffect(() => {
-    setName("Maria");
-  }, [name]); //Array de dependencias con variables
-
-  // console.log("Me ejecuto siempre");
+const CounterContainer = ({ stock, initial = 1, onAdd }) => {
+  const [contador, setContador] = useState(initial);
 
   const sumar = () => {
-    setContador(contador + 1);
+    if (contador < stock) {
+      setContador(contador + 1);
+    } else {
+      alert("Maximum stock");
+    }
   };
   const restar = () => {
     if (contador > 1) {
       setContador(contador - 1);
-      alert("Can't be less than one");
+    } else {
+      alert("Can't be less t han one");
     }
   };
-
-  console.log(name);
 
   let objectProps = {
     restar,
     sumar,
-    setName,
     contador,
+    onAdd,
   };
 
   return <Counter {...objectProps} />;

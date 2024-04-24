@@ -1,8 +1,8 @@
-import ItemList from "./ItemList.jsx";
-import "./ItemListContainer.css";
 import { products } from "../../../productsMock";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import ItemList from "./ItemList.jsx";
+import "./ItemListContainer.css";
 
 const ItemListContainer = () => {
   // const navigate = useNavigate();

@@ -10,13 +10,15 @@ import {
 import "./ProductCard.css";
 import { Link } from "react-router-dom";
 
-const ProductCard = ({ title, price, img, id, stock }) => {
+const ProductCard = ({ title, price, img, id }) => {
   return (
-    <Grid xs={12} sm={6} md={4} lg={3}>
-      <Card
-        sx={{ maxWidth: 345, backgroundColor: "#84a98c", border: "3px solid" }}
-      >
-        <CardMedia sx={{ height: 200, width: 200 }} image={img} alt="plants" />
+    <Grid xs={12} sm={6} md={4} lg={3} justifyContent="center">
+      <Card className="product-cards" sx={{ bgcolor: "#84a98c" }}>
+        <CardMedia
+          sx={{ height: 200, width: 200 }}
+          image={img}
+          alt="plants-cards"
+        />
         <CardContent>
           {/* <Typography
             sx={{ color: "white" }}
@@ -42,18 +44,18 @@ const ProductCard = ({ title, price, img, id, stock }) => {
           </Typography> */}
           <Typography
             sx={{ color: "white" }}
-            variant="body2"
+            variant="body1"
             color="text.secondary"
           >
             Price: ${price}
           </Typography>
-          <Typography
+          {/* <Typography
             sx={{ color: "white" }}
             variant="body2"
             color="text.secondary"
           >
             Stock: {stock}
-          </Typography>
+          </Typography> */}
         </CardContent>
         <CardActions>
           <Link to={`/itemDetail/${id}`}>
