@@ -1,9 +1,9 @@
-import { Typography, CardMedia } from "@mui/material";
+import { Typography, CardMedia, Card } from "@mui/material";
 import CounterContainer from "../../common/counter/CounterContainer";
 
-const ItemDetail = ({ item, onAdd }) => {
+const ItemDetail = ({ item, onAdd, initial }) => {
   return (
-    <div
+    <Card
       style={{
         display: "flex",
         flexDirection: "column",
@@ -41,12 +41,13 @@ const ItemDetail = ({ item, onAdd }) => {
 
       <CardMedia
         sx={{ height: 300, width: 300 }}
+        component={"img"}
         image={item.img}
         alt="plants"
       />
 
-      <CounterContainer stock={item.stock} onAdd={onAdd} />
-    </div>
+      <CounterContainer stock={item.stock} onAdd={onAdd} initial={initial} />
+    </Card>
   );
 };
 

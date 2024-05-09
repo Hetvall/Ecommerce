@@ -1,38 +1,57 @@
-import { products } from "../../../productsMock";
+import "./ItemListContainer.css";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ItemList from "./ItemList.jsx";
-import "./ItemListContainer.css";
+import { LinearProgress } from "@mui/material";
+import { db } from "../../../firebaseConfig";
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 const ItemListContainer = () => {
-  // const navigate = useNavigate();
   const { name } = useParams();
 
   const [items, setItems] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    let productsFiltered = products.filter(
-      (product) => product.category === name
-    );
-
-    const getProducts = new Promise((resolve, reject) => {
-      let x = true;
-      if (x) {
-        resolve(name ? productsFiltered : products);
-      } else {
-        reject({ status: 400, message: "Something went wrong" });
-      }
-    });
-
-    getProducts
-      .then((res) => setItems(res))
-      .catch((error) => {
-        setError(error);
-      });
+    const productsCollection = collection(db, "products");
+    let consult = productsCollection;
+    if (name) {
+      consult = query(productsCollection, where("category", "==", name));
+    }
+    getDocs(consult)
+      .then((res) => {
+        let newArray = res.docs.map((doc) => {
+          return { id: doc.id, ...doc.data() };
+        });
+        setItems(newArray);
+      })
+      .catch((error) => setError(error));
   }, [name]);
-  // navigate();
-  return <ItemList items={items} error={error} />;
+
+  // Adding the products from the code to the DB
+
+  // const addDocsProducts = () => {
+  //   let productsCollection = collection(db, "products");
+  //   products.forEach((product) => addDoc(productsCollection, product));
+  // };
+
+  return (
+    <>
+      {/* <button onClick={addDocsProducts}>Agregar Doc</button> */}
+
+      {items.length > 0 ? (
+        <ItemList items={items} error={error} />
+      ) : (
+        <div style={{ margin: "200px" }}>
+          <LinearProgress
+            sx={{ height: "15px" }}
+            color="success"
+            variant="query"
+          />
+        </div>
+      )}
+    </>
+  );
 };
 
 export default ItemListContainer;

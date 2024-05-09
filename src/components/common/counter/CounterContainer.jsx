@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Counter from "./Counter.jsx";
+import Swal from "sweetalert2";
 
 const CounterContainer = ({ stock, initial = 1, onAdd }) => {
   const [contador, setContador] = useState(initial);
@@ -8,14 +9,26 @@ const CounterContainer = ({ stock, initial = 1, onAdd }) => {
     if (contador < stock) {
       setContador(contador + 1);
     } else {
-      alert("Maximum stock");
+      Swal.fire({
+        position: "center",
+        icon: "info",
+        title: "Maximum stock reached",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   };
   const restar = () => {
     if (contador > 1) {
       setContador(contador - 1);
     } else {
-      alert("Can't be less t han one");
+      Swal.fire({
+        position: "center",
+        icon: "info",
+        title: "Can't be less than one",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   };
 

@@ -6,7 +6,7 @@ const Layout = () => {
   return (
     <div>
       <Navbar />
-      <div style={{ minHeight: "calc(100vh - 430px)" }}>
+      <div style={{ minHeight: "calc(100vh - 345px)" }}>
         <Outlet />
       </div>
       <Footer />

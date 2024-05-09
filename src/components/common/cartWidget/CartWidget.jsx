@@ -5,14 +5,15 @@ import { Link } from "react-router-dom";
 import { CartContext } from "../../../context/CartContext";
 
 const CartWidget = () => {
-  const { cart } = useContext(CartContext);
+  const { getTotalItems } = useContext(CartContext);
+  let total = getTotalItems();
 
   return (
     <div style={{ position: "relative" }}>
       <Link to="/cart">
         <Badge
           className="badge"
-          badgeContent={cart.length}
+          badgeContent={total}
           color="success"
           showZero
           style={{

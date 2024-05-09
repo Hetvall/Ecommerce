@@ -9,12 +9,73 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import "./Cart.css";
+import Swal from "sweetalert2";
 
-const Cart = ({ cart, clearCart, deleteById }) => {
+const Cart = ({ cart, clearCart, deleteById, total }) => {
+  const clearCartAlert = () => {
+    Swal.fire({
+      position: "center",
+      showConfirmButton: true,
+      showDenyButton: true,
+      title: "Are you sure you want to clean up your shopping cart?",
+      confirmButtonText: "Yes, clean up",
+      confirmButtonColor: "white",
+      denyButtonText: "No, continue shopping",
+      denyButtonColor: "green",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        clearCart();
+        Swal.fire({
+          showConfirmButton: false,
+          title: "The shopping Cart was succesfully cleaned",
+          icon: "success",
+        });
+      } else if (result.isDenied) {
+        Swal.fire({
+          showConfirmButton: false,
+          title: "The Cart stayed as before",
+          icon: "info",
+        });
+      }
+    });
+  };
+
+  const deleteButtonAlert = (productId) => {
+    Swal.fire({
+      position: "center",
+      showConfirmButton: true,
+      showDenyButton: true,
+      title: "Do you want to delete the product from your cart?",
+      confirmButtonText: "Yes, delete",
+      confirmButtonColor: "white",
+      denyButtonText: "No, leave product on Cart",
+      denyButtonColor: "green",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteById(productId);
+        Swal.fire({
+          showConfirmButton: false,
+          title: "The product was removed from your cart",
+          icon: "success",
+        });
+      } else if (result.isDenied) {
+        Swal.fire({
+          showConfirmButton: false,
+          title: "The product stayes in your cart",
+          icon: "info",
+        });
+      }
+    });
+  };
+
   return (
     <Card sx={{ display: "flex" }}>
       <CardContent sx={{ m: "20px" }}>
-        <Typography variant="body1" color="text.secondary">
+        <Typography
+          sx={{ display: { xs: "none", md: "flex" } }}
+          variant="body1"
+          color="text.secondary"
+        >
           Shooping List
         </Typography>
       </CardContent>
@@ -22,14 +83,31 @@ const Cart = ({ cart, clearCart, deleteById }) => {
       <Grid container spacing={2}>
         {cart.map((product) => (
           <Grid item key={product.id} xs={12}>
-            <Card sx={{ display: "flex", border: "1px solid" }}>
+            <Card
+              sx={{
+                display: "flex",
+                border: "1px solid",
+                maxWidth: "300px",
+                mt: "30px",
+                p: "20px",
+                "@media (min-width: 600px)": {
+                  maxWidth: "50%",
+                },
+              }}
+            >
               <CardMedia
-                sx={{ width: 100, height: 100, alignSelf: "center" }}
+                sx={{ width: 200, height: 150, alignSelf: "center" }}
                 image={product.img}
                 alt="plants-cards"
               />
+
               <CardContent>
-                <Box sx={{ display: "flex", flexDirection: "column" }}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
                   <Typography variant="h5">{product.title}</Typography>
                   <Typography variant="body3">
                     Total Price: ${product.price}
@@ -44,7 +122,7 @@ const Cart = ({ cart, clearCart, deleteById }) => {
                   variant="outlined"
                   color="warning"
                   size="small"
-                  onClick={() => deleteById(product.id)}
+                  onClick={() => deleteButtonAlert(product.id)}
                 >
                   Delete
                 </Button>
@@ -52,35 +130,54 @@ const Cart = ({ cart, clearCart, deleteById }) => {
             </Card>
           </Grid>
         ))}
-      </Grid>
-
-      <Grid
-        sx={{ m: "30px" }}
-        container
-        direction="column"
-        alignItems="center"
-        gap="10px"
-      >
-        <Button
-          onClick={clearCart}
-          variant="outlined"
-          color="inherit"
-          size="small"
+        <Grid
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            m: "30px",
+          }}
+          alignItems="flex-start"
+          gap="5px"
         >
-          Clear Cart
-        </Button>
+          {cart.length > 0 && (
+            <Button
+              onClick={clearCartAlert}
+              variant="outlined"
+              color="inherit"
+              size="small"
+              sx={{ mb: "10px" }}
+            >
+              Clear Cart
+            </Button>
+          )}
+          <Link to="/">
+            <Button
+              variant="outlined"
+              color="success"
+              size="small"
+              sx={{ mb: "10px" }}
+            >
+              Go Back
+            </Button>
+          </Link>
+          {cart.length > 0 && (
+            <Link to="/checkout">
+              <Button
+                variant="contained"
+                size="small"
+                color="success"
+                sx={{ mb: "10px" }}
+              >
+                Finalize purchase
+              </Button>
+            </Link>
+          )}
 
-        <Link to="/">
-          <Button variant="outlined" color="success" size="small">
-            Go Back
-          </Button>
-        </Link>
-
-        <Link to="/checkout">
-          <Button variant="contained" size="small" color="success">
-            Finalize purchase
-          </Button>
-        </Link>
+          {cart.length > 0 && (
+            <Typography variant="h6">Total to pay:${total}</Typography>
+          )}
+        </Grid>
       </Grid>
     </Card>
   );

@@ -4,8 +4,8 @@ import ItemDetailContainer from "./components/page/itemDetail/ItemDetailContaine
 import Layout from "./components/layout/Layout.jsx";
 import CartContainer from "./components/page/cart/CartContainer.jsx";
 import ErrorPage from "./components/page/errorPage/ErrorPage.jsx";
-import CheckoutContainer from "./components/page/checkout/CheckoutContainer.jsx";
 import CartContextProvider from "./context/CartContext.jsx";
+import CheckoutContainer from "./components/page/checkout/CheckoutContainer.jsx";
 
 function App() {
   return (

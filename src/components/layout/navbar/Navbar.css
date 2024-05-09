@@ -1,25 +1,5 @@
-.plant-logo {
-    width: 6%;
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-}
-
-.categories {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.category-list {
     list-style-type: none;
-    gap: 5em;
-    margin-bottom: 10px;
-    cursor: pointer;
-}
-
-.categories li:hover {
-    background-color: #84a98c;
-    border-radius: 10px;
-}
-
-.categories-bar {
-    background-color: #dad7cd;
+    padding: 0;
+    margin: 0;
 }

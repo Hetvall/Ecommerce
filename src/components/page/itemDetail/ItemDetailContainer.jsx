@@ -1,8 +1,10 @@
 import { useParams } from "react-router-dom";
-import { products } from "../../../productsMock";
 import { useState, useEffect, useContext } from "react";
 import { CartContext } from "../../../context/CartContext";
 import ItemDetail from "./ItemDetail";
+import Swal from "sweetalert2";
+import { db } from "../../../firebaseConfig";
+import { collection, doc, getDoc } from "firebase/firestore";
 
 const ItemDetailContainer = () => {
   const { id } = useParams();
@@ -11,26 +13,46 @@ const ItemDetailContainer = () => {
 
   const [error, setError] = useState(null);
 
-  const { addToCart } = useContext(CartContext);
+  const { addToCart, getQuantityById } = useContext(CartContext);
+
+  let initial = getQuantityById(+id);
 
   useEffect(() => {
-    let itemFound = products.find((product) => product.id === +id);
-    const getProduct = new Promise((resolve, reject) => {
-      if (itemFound) {
-        resolve(itemFound);
-      } else {
-        reject({ status: 400, message: "Something went wrong" });
-      }
-    });
-    getProduct.then((res) => setItem(res)).catch((error) => setError(error));
+    let productsCollection = collection(db, "products");
+    let refDoc = doc(productsCollection, id);
+    getDoc(refDoc)
+      .then((res) => {
+        setItem({ id: res.id, ...res.data() });
+      })
+      .catch((error) => setError(error.message));
   }, [id]);
 
   const onAdd = (cantidad) => {
     let product = { ...item, quantity: cantidad };
-    addToCart(product);
+    if (cantidad > item.stock) {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "We're sorry, there are not Stock for this product!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } else {
+      addToCart(product);
+
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "The product has been added to the cart!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
   };
 
-  return <ItemDetail item={item} onAdd={onAdd} error={error} />;
+  return (
+    <ItemDetail item={item} onAdd={onAdd} initial={initial} error={error} />
+  );
 };
 
 export default ItemDetailContainer;

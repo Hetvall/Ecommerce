@@ -1,28 +1,36 @@
-import { useState } from "react";
-import Checkout from "./Checkout.jsx";
+import { useContext, useState } from "react";
+import { CartContext } from "../../../context/CartContext";
+import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
+import { db } from "../../../firebaseConfig";
+import CheckoutFormik from "../checkoutFormik/CheckoutFormik";
 
 const CheckoutContainer = () => {
-  const [info, setInfo] = useState({
-    name: "",
-    phone: "",
-    email: "",
-  });
+  const { cart, getTotalPrice, clearCart } = useContext(CartContext);
 
-  const handleChange = (event) => {
-    let { name, value } = event.target;
-    setInfo({ ...info, [name]: value });
+  const [orderId, setOrderId] = useState(null);
+
+  let total = getTotalPrice();
+
+  const handleSubmit = (info) => {
+    let obj = {
+      buyer: info,
+      items: cart,
+      total: total,
+    };
+
+    let ordersCollection = collection(db, "orders");
+    addDoc(ordersCollection, obj)
+      .then((res) => setOrderId(res.id))
+      .catch((error) => console.log(error));
+
+    cart.forEach((product) => {
+      let refDoc = doc(db, "products", product.id);
+      updateDoc(refDoc, { stock: product.stock - product.quantity });
+    });
+
+    clearCart();
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-  };
-
-  let handles = {
-    handleSubmit,
-    handleChange,
-  };
-
-  return <Checkout {...handles} />;
+  return <CheckoutFormik orderId={orderId} onSubmit={handleSubmit} />;
 };
-
 export default CheckoutContainer;
